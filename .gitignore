@@ -1,1 +1,5 @@
 .vs
+/GameOne/bin/Debug/net6.0
+/GameOne/obj
+/GameOne.Tests/bin/Debug/net6.0
+/GameOne.Tests/obj
