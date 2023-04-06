@@ -5,26 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameOne {
-	public interface IInteractionInputOutput {
-		void Prompt();
-		string Read();
+	public interface IOutput {
+		void Say(string message);
+	}
+	public interface IInteractionInputOutput : IOutput {
+		string PromptAndRead();
 	}
 
 	public class Interaction {
-		IInteractionInputOutput _output;
+		readonly IInteractionInputOutput _io;
+		Scene _scene;
 
-		public Interaction(IInteractionInputOutput output) {
-			_output = output;
+		public Interaction(IInteractionInputOutput io, Scene scene) {
+			_io = io;
+			_scene = scene;
 		}
 
+		bool _keepRunning;
 		public void Run() {
-			_output.Prompt();
-			for(string uinp = _output.Read();this.KeepRunning(uinp);_output.Prompt(), uinp = _output.Read()) {
+			_scene.DescribeScene();
+			_keepRunning = true;
+			while(_keepRunning) {
+				var uinp = _io.PromptAndRead();
 				this.RunInternal(uinp);
 			}
 		}
 		internal void RunInternal(string uinp) {
-			Console.WriteLine($"du skrev {uinp}");
+			if(uinp == null)
+				throw new ArgumentNullException(nameof(uinp));
+
+			if(uinp.StartsWith(":"))
+				this.HandleGlobalCommand(uinp.Substring(1));
+			else
+				_scene.ReactTo(uinp);
+		}
+
+		internal void HandleGlobalCommand(string cmd) {
+			switch(cmd) {
+			case "?":
+				_scene.DescribeScene();
+				break;
+			case "q":
+				_keepRunning = false;
+				break;
+			}
 		}
 
 		internal bool KeepRunning(string uinp) {

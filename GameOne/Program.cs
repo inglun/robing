@@ -2,5 +2,6 @@
 using GameOne;
 
 Console.WriteLine("Hello, World!");
-var interaction = new Interaction(new InteractionInputOutputImpl());
+var io = new InteractionInputOutputImpl();
+var interaction = new Interaction(io, new Scene(io));
 interaction.Run();

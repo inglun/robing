@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameOne {
 	public class InteractionInputOutputImpl : IInteractionInputOutput {
-		public void Prompt() {
+		public string PromptAndRead() {
 			Console.Write("> ");
-		}
-		public string Read() {
 			return Console.ReadLine();
+		}
+
+		public void Say(string message) {
+			Console.WriteLine(message);
 		}
 	}
 }
