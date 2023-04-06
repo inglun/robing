@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameOne {
 	public class Scene {
-		IOutput _outp;
+		IGameOutput _outp;
 
-		public Scene(IOutput outp) {
+		public Scene(IGameOutput outp) {
 			_outp = outp;
 		}
 

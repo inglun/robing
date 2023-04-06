@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameOne {
-	public interface IOutput {
+	public interface IGameOutput {
 		void Say(string message);
 	}
-	public interface IGameInputOutput : IOutput {
+	public interface IGameInputOutput : IGameOutput {
 		string PromptAndRead();
 	}
 
@@ -49,10 +49,6 @@ namespace GameOne {
 				_keepRunning = false;
 				break;
 			}
-		}
-
-		internal bool KeepRunning(string uinp) {
-			return uinp != null && uinp != ":q";
 		}
 	}
 }
