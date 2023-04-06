@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameOne {
-	public class InteractionInputOutputImpl : IInteractionInputOutput {
+	public class GameInputOutputImpl : IGameInputOutput {
 		public string PromptAndRead() {
 			Console.Write("> ");
 			return Console.ReadLine();

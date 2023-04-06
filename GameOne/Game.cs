@@ -8,15 +8,15 @@ namespace GameOne {
 	public interface IOutput {
 		void Say(string message);
 	}
-	public interface IInteractionInputOutput : IOutput {
+	public interface IGameInputOutput : IOutput {
 		string PromptAndRead();
 	}
 
-	public class Interaction {
-		readonly IInteractionInputOutput _io;
+	public class Game {
+		readonly IGameInputOutput _io;
 		Scene _scene;
 
-		public Interaction(IInteractionInputOutput io, Scene scene) {
+		public Game(IGameInputOutput io, Scene scene) {
 			_io = io;
 			_scene = scene;
 		}

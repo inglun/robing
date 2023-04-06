@@ -3,14 +3,14 @@ using Moq;
 
 namespace GameOne.Tests {
 	[TestClass]
-	public class InteractionTests {
-		Interaction sut;
-		Mock<IInteractionInputOutput> io;
+	public class GameTests {
+		Game sut;
+		Mock<IGameInputOutput> io;
 
 		[TestInitialize]
 		public void Init() {
-			io = new Mock<IInteractionInputOutput>(MockBehavior.Strict);
-			sut = new Interaction(io.Object, new Scene(io.Object));
+			io = new Mock<IGameInputOutput>(MockBehavior.Strict);
+			sut = new Game(io.Object, new Scene(io.Object));
 		}
 		[TestCleanup]
 		public void Cleanup() {
@@ -19,6 +19,7 @@ namespace GameOne.Tests {
 
 		[TestMethod]
 		public void Run() {
+			io.Setup(x => x.Say(It.IsAny<string>()));
 			io.Setup(x => x.PromptAndRead()).Returns(":q");
 
 			sut.Run();
