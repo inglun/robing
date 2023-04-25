@@ -7,7 +7,7 @@ namespace GameOne {
 			Console.WriteLine("Hello, GameOne!");
 
 			var io = new Impl.GameInputOutput();
-			var game = new Game(io, new Scene(io));
+			var game = new Game(io);
 			game.Run();
 		}
 	}

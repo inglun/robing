@@ -14,40 +14,25 @@ namespace GameOne {
 
 	public class Game {
 		readonly IGameInputOutput _io;
-		Scene _scene;
 
-		public Game(IGameInputOutput io, Scene scene) {
+		public Game(IGameInputOutput io) {
 			_io = io;
-			_scene = scene;
 		}
 
 		bool _keepRunning;
 		public void Run() {
-			_scene.DescribeScene();
 			_keepRunning = true;
 			while(_keepRunning) {
 				var uinp = _io.PromptAndRead();
-				this.RunInternal(uinp);
-			}
-		}
-		internal void RunInternal(string uinp) {
-			if(uinp == null)
-				throw new ArgumentNullException(nameof(uinp));
-
-			if(uinp.StartsWith(":"))
-				this.HandleGlobalCommand(uinp.Substring(1));
-			else
-				_scene.ReactTo(uinp);
-		}
-
-		internal void HandleGlobalCommand(string cmd) {
-			switch(cmd) {
-			case "?":
-				_scene.DescribeScene();
-				break;
-			case "q":
-				_keepRunning = false;
-				break;
+				switch(uinp) {
+				case "q":
+					_io.Say("bye");
+					_keepRunning = false;
+					break;
+				default:
+					_io.Say($"Du sa '{uinp}'");
+					break;
+				}
 			}
 		}
 	}

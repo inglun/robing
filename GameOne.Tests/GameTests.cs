@@ -10,7 +10,7 @@ namespace GameOne.Tests {
 		[TestInitialize]
 		public void Init() {
 			io = new Mock<IGameInputOutput>(MockBehavior.Strict);
-			sut = new Game(io.Object, new Scene(io.Object));
+			sut = new Game(io.Object);
 		}
 		[TestCleanup]
 		public void Cleanup() {
@@ -19,16 +19,10 @@ namespace GameOne.Tests {
 
 		[TestMethod]
 		public void Run() {
-			io.Setup(x => x.Say(It.IsAny<string>()));
-			io.Setup(x => x.PromptAndRead()).Returns(":q");
+			io.Setup(x => x.Say("bye"));
+			io.Setup(x => x.PromptAndRead()).Returns("q");
 
 			sut.Run();
-		}
-		[TestMethod]
-		public void RunInternal() {
-			io.Setup(x => x.Say("du skrev qwe"));
-
-			sut.RunInternal("qwe");
 		}
 	}
 }
