@@ -30,7 +30,7 @@ namespace GameOne {
             int numberTargets = 2;
             while (numberTargets > 0)
             {
-                int rand_num = rnd.Next(0, max); // ska det vara max eller max-1
+                int rand_num = rnd.Next(0, max);
                 if (!map.ContainsKey(rand_num))
                 {
                     map.Add(rand_num, "mål");

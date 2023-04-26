@@ -1,0 +1,12 @@
+﻿gör spelet tvådimensionell
+nyckeln i map ska vara av typen Coordinate (en klass)
+max (som är 9 nu) ska döpas om till maxRows
+en maxCols ska läggas till (sätt den till 5 till att börja med så att det syns när
+du gör PrintBoard att du har fått saker rätt)
+
+där du idag gör (typ)
+int val = 8;
+map.Add(val, "sträng")
+ska du istället göra
+Coordinate coord = new Coordinate(8, 4); // exv nedre högra hörnet
+map.Add(coord, "sträng")
