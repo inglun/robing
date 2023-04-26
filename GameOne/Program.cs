@@ -6,8 +6,8 @@ namespace GameOne {
 		private static void Main(string[] args) {
 			Console.WriteLine("Hello, GameOne!");
 
-			var io = new Impl.GameInputOutput();
-			var game = new Game(io);
+			var game = new Game();
+			game.Init();
 			game.Run();
 		}
 	}
