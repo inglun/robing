@@ -4,87 +4,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameOne {
-	public class Game {
-		int max = 9;
-		Dictionary<int, string> map = new Dictionary<int, string>();
-		int shootsFired;
+namespace GameOne
+{
+    public class Game
+    {
+        int maxRows = 9;
+        int maxCols = 5;
+        Dictionary<Coordinate, string> map = new Dictionary<Coordinate, string>();
+        int shootsFired;
 
-		public void Init() {
-            /*// Math.Rand
-			//abcdef
-			Random rnd = new Random();
-			int rand_num = rnd.Next(0,max);
-			//Console.WriteLine(rand_num);
-            Random rnd2 = new Random();
-            int rand_num2 = rnd2.Next(0,max);
-			//Console.WriteLine(rand_num2);
-			if (rand_num2 == rand_num) {
-				Init();
-			}
-            map.Add(rand_num, "mål");
-			map.Add(rand_num2, "mål");
-			shootsFired = 0;*/
+        public void Init()
+        {
             Random rnd = new Random();
 
             int numberTargets = 2;
             while (numberTargets > 0)
             {
-                int rand_num = rnd.Next(0, max);
-                if (!map.ContainsKey(rand_num))
+                int randRow = rnd.Next(0, maxRows);
+                int randCol = rnd.Next(0, maxCols);
+                Coordinate randCoord = new Coordinate(randRow, randCol);
+                if (!map.ContainsKey(randCoord))
                 {
-                    map.Add(rand_num, "mål");
+                    map.Add(randCoord, "mål");
                     numberTargets--;
-                    Console.WriteLine(rand_num);
+                    Console.WriteLine(randCoord);
                 }
             }
         }
 
-		public void Run() {
-			do {
-				PrintBoard();
-				Console.Write("> ");
-				string s = Console.ReadLine();
-				int pos = int.Parse(s);
-				Console.WriteLine("du skrev " + pos);
-				ShootAt(pos);
-			} while(TargetsLeft() > 0);
-			PrintBoard();
-			Console.WriteLine("bye!");
-		}
-		public void ShootAt(int position) {
-			shootsFired++;
-			if(!map.ContainsKey(position)) {
-				map.Add(position, "X");
-			} else if(map[position] == "mål") {
-				map[position] = "O";
-			}
-		}
-		public void PrintBoard() {
-			Console.WriteLine("Du har skjutit " + shootsFired + " skott. Du har " + TargetsLeft() + " mål kvar att skjuta ner.");
-			for(int i = 0;i < max;i++) {
-				if(map.ContainsKey(i)) {
-					string val = map[i];
-					if(val == "mål") {
-						val = "#";
-					}
-					Console.WriteLine(i + ": " + val);
-				} else {
-					Console.WriteLine(i + ": #");
-				}
-			}
-		}
-		int TargetsLeft() {
-			return map.Values.Count(v => v == "mål");
-		}
-		int NotInUse() {
-			int res = 0;
-			for(int i = 0;i < max;i++) {
-				if(map.ContainsKey(i) && map[i] == "mål") {
-					res++;
-				}
-			}
-			return res;
-		}
-	}
+        public void Run()
+        {
+            do
+            {
+                PrintBoard();
+                Console.WriteLine("Row > ");
+                string s = Console.ReadLine();
+                int row = int.Parse(s);
+                Console.WriteLine("Row: " + row);
+                Console.WriteLine("Col > ");
+                s = Console.ReadLine() ;
+                int col = int.Parse(s);
+                Console.WriteLine("Col: " + col);
+                Coordinate coord = new Coordinate(row, col);
+                ShootAt(coord);
+            } while (TargetsLeft() > 0);
+            PrintBoard();
+            Console.WriteLine("bye!");
+        }
+        public void ShootAt(Coordinate position)
+        {
+            shootsFired++;
+            if (!map.ContainsKey(position))
+            {
+                map.Add(position, "X");
+            }
+            else if (map[position] == "mål")
+            {
+                map[position] = "O";
+            }
+        }
+        public void PrintBoard()
+        {
+            Console.WriteLine("Du har skjutit " + shootsFired + " skott. Du har " + TargetsLeft() + " mål kvar att skjuta ner.");
+            for (int row = 0; row < maxRows; row++)
+            {
+                Console.Write(row + ": ");
+                for (int col = 0; col < maxCols; col++)
+                {
+                    string val = "#";
+                    Coordinate coord = new Coordinate(row, col);
+                    if (map.ContainsKey(coord))
+                    {
+                        val = map[coord];
+                        if (val == "mål")
+                        {
+                            val = "#";
+                        }
+                    }
+                    Console.Write(val + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+        int TargetsLeft()
+        {
+            return map.Values.Count(v => v == "mål");
+        }
+        
+    }
 }
