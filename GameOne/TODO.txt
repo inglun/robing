@@ -1,12 +1,24 @@
-﻿gör spelet tvådimensionell
-nyckeln i map ska vara av typen Coordinate (en klass)
-max (som är 9 nu) ska döpas om till maxRows
-en maxCols ska läggas till (sätt den till 5 till att börja med så att det syns när
-du gör PrintBoard att du har fått saker rätt)
+﻿1 Skriv ut kolmnhuvud
 
-där du idag gör (typ)
-int val = 8;
-map.Add(val, "sträng")
-ska du istället göra
-Coordinate coord = new Coordinate(8, 4); // exv nedre högra hörnet
-map.Add(coord, "sträng")
+2 Fixa till PrintBoard så att
+if (map.ContainsKey(coord))
+{
+    val = map[coord];
+    if (val == "mål")
+    {
+        val = "#";
+    }
+}
+blir betydligt enklare. TIPS: komplettera if-villkoret så att man inte går
+in i if-blocket över huvud taget om det står "mål" på koordinaten coord
+
+3 Skriv en metod, GetCoordinateToShootAtFromUser som läser användarens input och returnerar en Coordinate,
+public Coordinate GetCoordinateToShootAtFromUser() {
+    // läs vad användaren skriver och returnera det
+}
+loopen (do-while) i Run ska alltså göra
+... {
+    PrintBoard();
+    Coordinate coord = GetCoordinateToShootAtFromUser();
+    ShootAt(coord);
+} ...
