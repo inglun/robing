@@ -8,8 +8,8 @@ namespace GameOne
 {
     public class Game
     {
-        int maxRows = 9;
-        int maxCols = 5;
+        int maxRows = 8;
+        int maxCols = 8;
         Dictionary<Coordinate, string> map = new Dictionary<Coordinate, string>();
         int shootsFired;
 
@@ -57,15 +57,30 @@ namespace GameOne
             if (!map.ContainsKey(position))
             {
                 map.Add(position, "X");
+                Console.WriteLine("Sploosh!");
             }
             else if (map[position] == "mål")
             {
                 map[position] = "O";
+                Console.WriteLine("Kaboom!");
             }
         }
         public void PrintBoard()
         {
             Console.WriteLine("Du har skjutit " + shootsFired + " skott. Du har " + TargetsLeft() + " mål kvar att skjuta ner.");
+            Console.WriteLine();
+            Console.Write("   ");
+            for (int col = 0; col < maxCols; col++)
+            {
+                Console.Write(col + " ");
+            }
+            Console.WriteLine();
+            Console.Write("   ");
+            for (int col = 0; col < maxCols; col++)
+            {
+                Console.Write("¨ ");
+            }
+            Console.WriteLine() ;
             for (int row = 0; row < maxRows; row++)
             {
                 Console.Write(row + ": ");
