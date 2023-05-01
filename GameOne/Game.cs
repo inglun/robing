@@ -88,13 +88,9 @@ namespace GameOne
                 {
                     string val = "#";
                     Coordinate coord = new Coordinate(row, col);
-                    if (map.ContainsKey(coord))
+                    if (map.ContainsKey(coord) && map[coord] != "mål")
                     {
                         val = map[coord];
-                        if (val == "mål")
-                        {
-                            val = "#";
-                        }
                     }
                     Console.Write(val + " ");
                 }
