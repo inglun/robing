@@ -37,16 +37,7 @@ namespace GameOne
             do
             {
                 PrintBoard();
-                Console.WriteLine("Row > ");
-                string s = Console.ReadLine();
-                int row = int.Parse(s);
-                Console.WriteLine("Row: " + row);
-                Console.WriteLine("Col > ");
-                s = Console.ReadLine() ;
-                int col = int.Parse(s);
-                Console.WriteLine("Col: " + col);
-                Coordinate coord = new Coordinate(row, col);
-                ShootAt(coord);
+                ShootAt(GetCoordinateToShootAtFromUser());
             } while (TargetsLeft() > 0);
             PrintBoard();
             Console.WriteLine("bye!");
@@ -64,6 +55,21 @@ namespace GameOne
                 map[position] = "O";
                 Console.WriteLine("Kaboom!");
             }
+        }
+        
+
+        public Coordinate GetCoordinateToShootAtFromUser()
+        {
+            Console.WriteLine("Row > ");
+            string s = Console.ReadLine();
+            int row = int.Parse(s);
+            Console.WriteLine("Row: " + row);
+            Console.WriteLine("Col > ");
+            s = Console.ReadLine();
+            int col = int.Parse(s);
+            Console.WriteLine("Col: " + col);
+            Coordinate coord = new Coordinate(row, col);
+            return coord;
         }
         public void PrintBoard()
         {
