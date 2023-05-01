@@ -68,8 +68,7 @@ namespace GameOne
             s = Console.ReadLine();
             int col = int.Parse(s);
             Console.WriteLine("Col: " + col);
-            Coordinate coord = new Coordinate(row, col);
-            return coord;
+            return new Coordinate(row, col);
         }
         public void PrintBoard()
         {
