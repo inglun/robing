@@ -60,12 +60,26 @@ namespace GameOne
 
         public Coordinate GetCoordinateToShootAtFromUser()
         {
-            Console.Write("Enter coordinates > ");
-            string s = Console.ReadLine();
-            string[] parts = s.Split(' ');
-            Console.WriteLine("Shooting at: " + parts[0] + ", " + parts[1]);
-            int row = int.Parse(parts[0]);
-            int col = int.Parse(parts[1]);
+            int row = -1;
+            int col = -1;
+            bool keepAsking = true;
+            do
+            {
+                try
+                {
+                    Console.Write("Enter coordinates > ");
+                    string s = Console.ReadLine();
+                    string[] parts = s.Split(' ');
+                    row = int.Parse(parts[0]);
+                    col = int.Parse(parts[1]);
+                    keepAsking = false;
+                }
+                catch
+                {
+                    Console.WriteLine("Ogiltig koordinat, försök igen");
+                }
+            } while (keepAsking);
+            Console.WriteLine("Shooting at: " + row + ", " + col);
             return new Coordinate(row, col);
         }
         public void PrintBoard()
