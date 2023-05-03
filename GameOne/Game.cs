@@ -71,12 +71,22 @@ namespace GameOne
                     string s = Console.ReadLine();
                     string[] parts = s.Split(' ');
                     row = int.Parse(parts[0]);
+                    if (row > maxRows || row < 0)
+                    {
+                        Console.WriteLine("X-koordinaten ligger utanför brädet!");
+                        throw new ArgumentOutOfRangeException();
+                    }
                     col = int.Parse(parts[1]);
+                    if (col > maxCols || col < 0)
+                    {
+                        Console.WriteLine("Y-koordinaten ligger utanför brädet!");
+                        throw new ArgumentOutOfRangeException();
+                    }
                     keepAsking = false;
                 }
                 catch
                 {
-                    Console.WriteLine("Ogiltig koordinat, försök igen");
+                    Console.WriteLine("Ogiltig koordinat, försök igen!");
                 }
             } while (keepAsking);
             Console.WriteLine("Shooting at: " + row + ", " + col);
