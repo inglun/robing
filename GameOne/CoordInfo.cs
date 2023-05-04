@@ -14,5 +14,16 @@ namespace GameOne {
 				return this.HasTarget && this.ShotsFiredAt > 0;
 			}
 		}
+		public string GetBoardSymbol() {
+			if(this.ShotsFiredAt == 0) {
+				return "#";
+			}
+
+			if(this.HasTakenHit) {
+				return "X";
+			} else {
+				return "O";
+			}
+		}
 	}
 }
