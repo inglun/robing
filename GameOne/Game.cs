@@ -73,12 +73,12 @@ namespace GameOne
                     row = int.Parse(parts[0]);
                     if (row > maxRows || row < 0)
                     {
-                        throw new ArgumentOutOfRangeException("row", "X-koordinaten ligger utanför brädet!");
+                        throw new ApplicationException("X-koordinaten ligger utanför brädet!");
                     }
                     col = int.Parse(parts[1]);
                     if (col > maxCols || col < 0)
                     {
-                        throw new ArgumentOutOfRangeException("col", "Y-koordinaten ligger utanför brädet!");
+                        throw new ApplicationException("Y-koordinaten ligger utanför brädet!");
                     }
                     keepAsking = false;
                 }
