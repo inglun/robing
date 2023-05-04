@@ -8,27 +8,37 @@ namespace GameOne.Tests {
 
 			Assert.AreEqual(0, sut.ShotsFiredAt);
 			Assert.IsFalse(sut.HasTarget);
+			Assert.IsFalse(sut.Hittable);
 			Assert.AreEqual("#", sut.GetBoardSymbol());
 		}
 		[TestMethod]
 		public void ShootAt_NoTarget() {
 			CoordInfo sut = new CoordInfo();
 
-			sut.ShootAt();
+			bool res = sut.ShootAt();
 
+			Assert.IsFalse(res);
 			Assert.AreEqual(1, sut.ShotsFiredAt);
 			Assert.IsFalse(sut.HasTakenHit);
-			Assert.AreEqual("O", sut.GetBoardSymbol());
+			Assert.AreEqual("X", sut.GetBoardSymbol());
+		}
+		[TestMethod]
+		public void HittableWhenHasTargetAndNoShootsFired() {
+			CoordInfo sut = new CoordInfo() { HasTarget = true };
+
+			Assert.IsTrue(sut.Hittable);
 		}
 		[TestMethod]
 		public void ShootAt_Target() {
 			CoordInfo sut = new CoordInfo() { HasTarget = true };
 
-			sut.ShootAt();
+			bool res = sut.ShootAt();
 
+			Assert.IsTrue(res);
 			Assert.AreEqual(1, sut.ShotsFiredAt);
 			Assert.IsTrue(sut.HasTakenHit);
-			Assert.AreEqual("X", sut.GetBoardSymbol());
+			Assert.IsFalse(sut.Hittable);
+			Assert.AreEqual("O", sut.GetBoardSymbol());
 		}
 	}
 }
