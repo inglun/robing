@@ -73,20 +73,18 @@ namespace GameOne
                     row = int.Parse(parts[0]);
                     if (row > maxRows || row < 0)
                     {
-                        Console.WriteLine("X-koordinaten ligger utanför brädet!");
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException("row", "X-koordinaten ligger utanför brädet!");
                     }
                     col = int.Parse(parts[1]);
                     if (col > maxCols || col < 0)
                     {
-                        Console.WriteLine("Y-koordinaten ligger utanför brädet!");
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException("col", "Y-koordinaten ligger utanför brädet!");
                     }
                     keepAsking = false;
                 }
-                catch
+                catch(Exception ex)
                 {
-                    Console.WriteLine("Ogiltig koordinat, försök igen!");
+                    Console.WriteLine($"{ex.Message} Försök igen!");
                 }
             } while (keepAsking);
             Console.WriteLine("Shooting at: " + row + ", " + col);
