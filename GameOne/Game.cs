@@ -71,7 +71,7 @@ namespace GameOne {
 					if(col > maxCols || col < 0) {
 						throw new ApplicationException("Y-koordinaten ligger utanför brädet!");
 					}
-					// TODO: throw om man redan har skjutit "här"
+					// TODO: throw om man redan har skjutit "här". Titta på t.ex. rad 27 o 28
 					keepAsking = false;
 				} catch(Exception ex) {
 					Console.WriteLine($"{ex.Message} Försök igen!");
