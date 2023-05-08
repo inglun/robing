@@ -71,6 +71,11 @@ namespace GameOne {
 					if(col > maxCols || col < 0) {
 						throw new ApplicationException("Y-koordinaten ligger utanför brädet!");
 					}
+					Coordinate position = new Coordinate(row, col);
+					CoordInfo coordInfo = map[position];
+					if (coordInfo.ShotsFiredAt == 1) {
+						throw new ApplicationException("Skjut någon annanstans!");
+					}
 					// TODO: throw om man redan har skjutit "här". Titta på t.ex. rad 27 o 28
 					keepAsking = false;
 				} catch(Exception ex) {
