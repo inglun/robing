@@ -37,7 +37,8 @@ namespace GameOne {
 		public void Run() {
 			do {
 				PrintBoard();
-				ShootAt(GetCoordinateToShootAtFromUser());
+				Coordinate answerFromUser = GetCoordinateToShootAtFromUser();
+				ShootAt(answerFromUser);
 			} while(TargetsLeft() > 0);
 			PrintBoard();
 			Console.WriteLine("bye!");
